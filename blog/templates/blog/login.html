@@ -1,0 +1,27 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}
+    Sign In
+{% endblock %}
+
+{% block body %}
+<div class='page'>
+    <div class='incorrect'>
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %}
+    </div>
+    <form method="POST" class='login-form'>
+        {% csrf_token %}
+        <label for='username'>Username</label>
+        <input type='text' name='username' required>
+        <label for='password'>Password</label>
+        <input type='password' name='password' required>
+        <input class='submit' type='submit' value='SUBMIT'>
+    </form>
+    <div class='create-acc'>
+        <p><i>Don't have an account? <a href='{% url "create-account" %}'>Create one!</a></i></p>
+    </div>
+</div>
+
+{% endblock %}

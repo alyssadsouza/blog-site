@@ -1,0 +1,32 @@
+{% extends "blog/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{username}} - Posts
+{% endblock %}
+
+{% block body %}
+<div class='page'>
+    <div class='bkgd-img'>
+        <img src="{% static 'blog/bkgd.png' %}" width='1590px'>
+    </div>
+    <nav>
+        <span><a href="{% url 'home' %}">Dashboard</a></span>
+        <span><a href="{% url 'new' %}">New Post</a></span>
+        <span><a href="{% url 'logout' %}">Log Out</a></span>
+    </nav> 
+    <div class='username'>
+        <h1>{{username}}</h1>
+    </div>
+    <h1 id='recent-posts'>Recent Posts</h1>
+    <div class='list-posts'>
+        <ul>
+            {% for i in posts %}
+                <li><a href="{% url 'user_post' title=i %}">{{i}}</a></li>
+            {% empty %}
+                <li>You don't have any posts yet. <a href='{% url "new" %}'>Create one!</a></li>
+            {% endfor %}
+        </ul>
+    </div> 
+</div>
+{% endblock %}

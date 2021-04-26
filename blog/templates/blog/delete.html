@@ -1,0 +1,21 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}
+    Delete A Post
+{% endblock %}
+
+{% block body %}
+<div class='page'>
+    <nav>
+        <span><a href="{% url 'home' %}">Dashboard</a></span>
+        <span><a href="{% url 'new' %}">New Post</a></span>
+        <span><a href="{% url 'logout' %}">Log Out</a></span>
+    </nav>  
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{title}}"?</p>
+        <button onclick="window.history.back();" class="submit" type="button" style='margin-right:10px;transform:translate(-115%);'>Cancel</button>
+        <input class="submit" type="submit" value="Confirm" style='margin-left:10px;transform:translate(-115%);'/>
+    </form>
+</div>
+{% endblock %}
