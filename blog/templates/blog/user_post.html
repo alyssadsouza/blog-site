@@ -1,0 +1,21 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block body %}
+<div class='page'>
+    <nav>
+        <span><a href="{% url 'home' %}">Dashboard</a></span>
+        <span><a href="{% url 'new' %}">New Post</a></span>
+        <span><a href="{% url 'logout' %}">Log Out</a></span>
+    </nav>  
+    <div class='post'>
+        <h1 class='title'>{{title}}</h1>
+        {{viewer_post|safe}}
+        <a href='{% url "edit" title=title %}'>Edit</a>
+        <a href='{% url "delete" title=title %}'>Delete</a>
+    </div>
+</div>
+{% endblock %}

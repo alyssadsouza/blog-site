@@ -1,0 +1,21 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}
+    New Post
+{% endblock %}
+
+{% block body %} 
+    <div class='page'>
+        <nav>
+            <span><a href="{% url 'home' %}">Dashboard</a></span>
+            <span><a href="{% url 'new' %}">New Post</a></span>
+            <span><a href="{% url 'logout' %}">Log Out</a></span>
+        </nav>
+        <form action='{% url "save" %}' method="POST">
+            {% csrf_token %}
+            <input class='title-input' type='text' name='title' placeholder="Title your post..." required>
+            <textarea class='content' name ='post'>Enter the Markdown content for the post...</textarea>
+            <input class='submit' style='transform: translate(-50%,200%);' type='submit' value="Save your post">
+        </form>
+    </div>
+{% endblock %}

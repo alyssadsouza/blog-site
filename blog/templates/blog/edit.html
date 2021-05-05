@@ -1,0 +1,21 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}
+    Edit - {{title}}
+{% endblock %}
+
+{% block body %}
+    <div class='page'>
+        <nav>
+            <span><a href="{% url 'home' %}">Dashboard</a></span>
+            <span><a href="{% url 'new' %}">New Post</a></span>
+            <span><a href="{% url 'logout' %}">Log Out</a></span>
+        </nav>
+        <form action='{% url "save" %}' method="POST" class="editpost">
+            {% csrf_token %}
+            <input type='hidden' name='title' value="{{title}}">
+            <textarea class='content' name ='post'>{{post}}</textarea>
+            <input class='submit' style='transform: translate(-50%,200%);' type='submit' value="Save your edits">
+        </form>
+    </div>
+{% endblock %}
