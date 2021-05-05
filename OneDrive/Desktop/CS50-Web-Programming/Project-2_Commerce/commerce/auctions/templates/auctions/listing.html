@@ -1,0 +1,96 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}View Listing - {{ listing.title }}{% endblock %}
+
+{% block body %}
+    <div>
+        <h2>Listing: {{ listing.title }}</h2>
+        
+        {% if lister %}
+            <form action="{% url 'close' listing.id %}" class="no-margin-form">
+                {% csrf_token %}
+                <input type='submit' class='btn btn-primary' value='Close auction'>
+            </form>
+        {% elif listing.active %}
+            {% if user.is_authenticated %}
+            <form action='' method='POST' class='no-margin-form'>
+                {% csrf_token %}
+                <input type='hidden' name='listing' value='{{listing.id}}'>
+                {% if listing not in watchlist %}
+                    <input type='hidden' name='add' value='True'>
+                    <input type='submit' class="btn btn-primary" value="+ Add to Watchlist">
+                {% else %}
+                    <input type='hidden' name='add' value='False'>
+                    <input type='submit' class="btn btn-primary" value="Remove from Watchlist">
+                {% endif %}
+            </form>
+            {% endif %}
+        {% endif %}
+    
+        <div class='listing-image'>
+            <img src={{listing.image}} height='500px'>
+        </div>
+        
+        <p>{{ listing.description }}</p>
+
+        {% if listing.active %}
+
+            <h2>${{ price }}</h2><br>
+
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
+
+            {{bidnum}} bid(s) so far.
+        
+            <form action="{% url 'bid' listing.id %}" method="POST" class='no-margin-form'>
+                {% csrf_token %}
+                <input type='number' class="form-control" name='bid' step='0.01' placeholder='Bid' required><br>
+                <input type='submit' class="btn btn-primary" value="Place Bid">
+            </form>
+            <br>
+        
+        {% else %}
+
+            <h2>Closed</h2>
+            {% if winner %}
+                <p>Congratulations! You were the highest bidder for this listing.</p>
+            {% else %}    
+                <p>This item has been sold to the highest bidder.</p>
+            {% endif %}
+
+        {% endif %}
+        
+        <div class='details'>
+            <h4>Details</h4>
+            <ul>
+                <li>Listed by: <strong class='user'>{{publisher}}</strong> </li>
+                <li>Category: <strong class='user'>{{category}}</strong></li>
+            </ul>
+        </div>
+        
+        <div class='comments'>
+            <h4>Comments</h4>
+            {% for comment in comments %}
+                <div class='comment'>
+                    <p>{{comment.comment}}</p>
+                    <h1 class='commented-by'>Commented by <strong class='user'>{{comment.user}}</strong> | {{comment.time}}</h1>
+                </div>
+            {% empty %}
+                There are currently no comments on this listing.
+            {% endfor %}
+            <br>
+            <br>
+            <div class='add-comment'>
+                <form action='{% url "comment" listing.id %}' class='no-margin-form' method="POST">
+                    {% csrf_token %}
+                    <textarea name='comment' class="form-control" placeholder='Add a comment'></textarea>
+                    <br>
+                    <input type='submit' class='btn btn-primary'>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}

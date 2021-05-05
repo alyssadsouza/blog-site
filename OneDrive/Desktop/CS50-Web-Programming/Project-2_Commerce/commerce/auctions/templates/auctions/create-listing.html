@@ -1,0 +1,32 @@
+{% extends 'auctions/layout.html' %}
+
+{% block title %}Add a Listing{% endblock %}
+
+{% block body %}
+
+<form action='' method='POST'>
+    {% csrf_token %}
+    <label for='title'>Title</label><br>
+    <input type='text' class="form-control" name='title' id='title' required><br>
+    <br>
+    <label for='description'>Description</label><br>
+    <textarea name='description' class="form-control" id='description' required></textarea><br>
+    <br>
+    <label for='start_bid'>Starting Bid</label><br>
+    <input type='number' class="form-control" step='0.01' name='starting_bid' id='starting_bid' required><br>
+    <br>
+    <label for='image'>Add an image URL</label><br>
+    <input type='url' class="form-control" id='image' name='image'><br>
+    <br>
+    <label>Category</label><br>
+    <select class="form-control" name='category' id=category>
+        <option value=''></option>
+        {% for value, display in categories %}
+            <option value='{{value}}'>{{display}}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <input type='submit'>
+</form>
+
+{% endblock %}

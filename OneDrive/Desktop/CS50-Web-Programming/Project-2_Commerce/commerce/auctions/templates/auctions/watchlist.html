@@ -1,0 +1,28 @@
+{% extends 'auctions/layout.html' %}
+
+{% block title %}{{user.username}} - Watchlist{% endblock %}
+
+{% block body %}
+
+    <h2>My Watchlist</h2>
+
+    <div class='watchlistings'>
+        {% for listing in watchlist %}
+            <a href="{% url 'listing' listing.id %}">
+                <div class='single-listing'>
+                    <div class='images'>
+                        <img src={{listing.image}} width='100%'>  
+                    </div>
+                    <div class='description'>
+                        <h4>{{listing.title}}</h4>
+                        <p><b>Price:</b> ${{listing.starting_bid}}</p>
+                        <p>{{listing.description}}</p>
+                    </div>
+                </div>
+            </a>
+        {% empty %}
+            No listings currently being watched.
+        {% endfor %}
+    </div>
+
+{% endblock %}

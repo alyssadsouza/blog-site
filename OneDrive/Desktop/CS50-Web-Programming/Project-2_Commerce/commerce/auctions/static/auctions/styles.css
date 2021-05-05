@@ -1,0 +1,64 @@
+body {
+    padding: 10px;
+}
+
+
+.single-listing, .comment {
+    margin:5px;
+    padding:20px;
+    border: 1px solid rgb(221, 221, 221);
+    color:black;
+}
+
+.single-listing {
+    height:250px;
+}
+
+.single-listing .images {
+    float:left;
+    margin:10px;
+    width:300px;
+    height:190px;
+    overflow: hidden;
+}
+
+.single-listing .images img {
+    position:relative;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+}
+
+.single-listing .description {
+    position:relative;
+    float:left;
+    margin:10px;
+}
+
+form {
+    margin:20px;
+}
+
+.listing-image img{
+    position:relative;
+    left:50%;
+    transform: translate(-50%);
+}
+
+.no-margin-form {
+    margin:0;
+}
+
+.comments h4 {
+    color:steelblue;
+    font-size: 18px;
+}
+
+.commented-by {
+    color:grey;
+    font-size: 13px;
+}
+
+.user {
+    color:steelblue;
+}

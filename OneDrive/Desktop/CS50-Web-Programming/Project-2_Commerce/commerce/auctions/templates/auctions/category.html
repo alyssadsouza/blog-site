@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}Categories{% endblock %}
+
+{% block body %}
+
+    <div class='active-listings'>
+    {% for listing in listings %}
+        <a href="{% url 'listing' listing.id %}">
+            <div class='single-listing'>
+                <div class='images'>
+                    <img src={{listing.image}} width='100%'>  
+                </div>
+                <div class='description'>
+                    <h4>{{listing.title}}</h4>
+                    <p><b>Price:</b> ${{listing.starting_bid}}</p>
+                    <p>{{listing.description}}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% empty %}
+        No listings currently.
+    {% endfor %}
+
+{% endblock %}
