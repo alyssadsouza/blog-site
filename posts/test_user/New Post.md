@@ -1,6 +1,5 @@
 #Starting a New Post
 
-
-
 This is a new post.
-#(wow)
+
+Here is some *text*.
